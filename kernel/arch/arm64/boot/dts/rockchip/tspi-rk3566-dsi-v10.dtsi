@@ -58,11 +58,33 @@
 	status = "okay";
 };
 
+&i2c1 {
+	status = "okay";
+	clock-frequency = <400000>;
+	myts@38 {
+        compatible = "my,touch";
+        reg = <0x38>;
+        tp-size = <89>;
+        max-x = <480>;
+        max-y = <800>;
+        touch-gpio = <&gpio1 RK_PA0 IRQ_TYPE_LEVEL_LOW>;
+        reset-gpio = <&gpio1 RK_PA1 GPIO_ACTIVE_HIGH>;
+    };
+	GP7101@58 {
+        compatible = "gp7101-backlight";
+        reg = <0x58>;
+		max-brightness-levels = <255>;
+		default-brightness-level = <100>;
+    };
+};
 
 &pinctrl {
 	dsi1 {
 		dsi1_rst_gpio: dsi1-rst-gpio {
 			rockchip,pins = <3 RK_PC1 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+		touch_gpio: touch-gpio {
+			rockchip,pins = <1 RK_PA0 RK_FUNC_GPIO &pcfg_pull_up>;
 		};
 	};
 };

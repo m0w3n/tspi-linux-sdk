@@ -141,18 +141,18 @@
 /*************************************************
 				11.6寸1366x768
 **************************************************/
-&edp_timing0 {
-	clock-frequency = <72300000>;
-	hactive = <1366>;
-	vactive = <768>;
-	hfront-porch = <150>;
-	hsync-len = <5>;
-	hback-porch = <5>;
-	vfront-porch = <3>;
-	vsync-len = <1>;
-	vback-porch = <9>;
-	hsync-active = <0>;
-	vsync-active = <0>;
-	de-active = <0>;
-	pixelclk-active = <0>;
-};
+// &edp_timing0 {
+// 	clock-frequency = <72300000>;
+// 	hactive = <1366>;
+// 	vactive = <768>;
+// 	hfront-porch = <150>;
+// 	hsync-len = <5>;
+// 	hback-porch = <5>;
+// 	vfront-porch = <3>;
+// 	vsync-len = <1>;
+// 	vback-porch = <9>;
+// 	hsync-active = <0>;
+// 	vsync-active = <0>;
+// 	de-active = <0>;
+// 	pixelclk-active = <0>;
+// };

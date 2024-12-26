@@ -29,7 +29,7 @@
 };
 //摄像头D-PHY接口
 &csi2_dphy0 {
-	status = "okay";
+	status = "disabled";
 	/*
 	 * dphy0 only used for full mode,
 	 * full mode and split mode are mutually exclusive
@@ -45,7 +45,7 @@
 
 			dphy0_in: endpoint@1 {
 				reg = <1>;
-				remote-endpoint = <&hdmiin_out0>;
+				// remote-endpoint = <&gc8034_out>;
 				data-lanes = <1 2 3 4>;
 			};
 		};
@@ -65,7 +65,7 @@
 
 //摄像头D-PHY接口
 &csi2_dphy1 {
-	status = "disabled";
+	status = "okay";
 
 	/*
 	 * dphy1 only used for split mode,
@@ -230,7 +230,7 @@
 
 		isp0_in: endpoint@0 {
 			reg = <0>;
-			remote-endpoint = <&dphy0_out>;
+			remote-endpoint = <&dphy1_out>;
 		};
 	};
 };
@@ -239,7 +239,7 @@
 	/* i2c4 sda conflict with camera pwdn */
 	status = "okay";
 	ov5695: ov5695@36 {
-		status = "disabled";
+		status = "okay";
 		compatible = "ovti,ov5695";
 		reg = <0x36>;
 		clocks = <&cru CLK_CIF_OUT>;
@@ -261,45 +261,4 @@
 			};
 		};
 	};
-
-	rk628_csi_v4l2: rk628_csi_v4l2@50 {
-		status = "disabled";
-		reg = <0x50>;
-		compatible = "rockchip,rk628-csi-v4l2";
-
-		pinctrl-names = "default";
-		pinctrl-0 = <&refclk_pins>;
-		assigned-clocks = <&pmucru CLK_WIFI>;
-		assigned-clock-rates = <24000000>;
-		clocks = <&pmucru CLK_WIFI>;
-		clock-names = "soc_24M";
-
-		interrupt-parent = <&gpio3>;
-		interrupts = <RK_PA1 IRQ_TYPE_LEVEL_HIGH>; // 11
-		enable-gpios = <&gpio3 RK_PA3 GPIO_ACTIVE_HIGH>; // 15
-		reset-gpios = <&gpio4 RK_PB5 GPIO_ACTIVE_LOW>;
-		//hdcp-enable = <1>;
-		scaler-en = <1>;
-
-		/*
-		* If the hpd output level is inverted on the circuit,
-		* the following configuration needs to be enabled.
-		*/
-
-		/* hpd-output-inverted; */
-		plugin-det-gpios = <&gpio3 RK_PA2 GPIO_ACTIVE_LOW>; // 13
-		//power-gpios = <&gpio0 17 GPIO_ACTIVE_HIGH>;
-		rockchip,camera-module-index = <0>;
-		rockchip,camera-module-facing = "back";
-		rockchip,camera-module-name = "RK628-CSI";
-		rockchip,camera-module-lens-name = "NC";
-
-		port {
-			hdmiin_out0: endpoint {
-				remote-endpoint = <&dphy0_in>;
-				data-lanes = <1 2 3 4>;
-			};
-		};
-	};
-
 };
